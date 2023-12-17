@@ -1,6 +1,6 @@
-import {Link} from "@/types/general";
+import {link} from "@/types/general";
 
-export const navLinks: Link[] = [
+export const navLinks: link[] = [
     {
         label: 'Home',
         route: '/',
@@ -26,4 +26,9 @@ export const eventDefaultValues = {
     price: '',
     isFree: false,
     url: '',
+}
+
+export const defaultMongooseConnection = {
+    conn: null,
+    promise: null
 }
