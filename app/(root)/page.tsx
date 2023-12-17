@@ -14,6 +14,7 @@ export default function Home() {
                       <Link href="#events">Explore Now</Link>
                   </Button>
               </div>
+              <Image src="/assets/images/hero.png" alt="hero-bg" width={1000} height={1000}></Image>
           </div>
       </section>
     </>
