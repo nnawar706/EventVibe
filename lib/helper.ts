@@ -1,3 +1,7 @@
+export const generateKey = () => {
+    return Math.floor(Math.random() * 900) + 100;
+};
+
 // export default function callToast(
 //     toast: React.RefObject<Toast | null>,
 //     type: boolean | string,
@@ -12,3 +16,4 @@
 //         });
 //     }
 // }
+
