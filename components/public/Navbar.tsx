@@ -1,6 +1,6 @@
 const Navbar = () => {
     return (
-        <h1>Nav</h1>
+        <ul className="md:flex-between flex"></ul>
     )
 }
 
