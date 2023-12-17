@@ -1,5 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
+import {SignedIn, SignedOut, UserButton} from "@clerk/nextjs";
+
+import {Button} from "@/components/ui/button";
+import Navbar from "@/components/public/Navbar";
+import NavbarMobile from "@/components/public/NavbarMobile";
 
 export const Header = () => {
     return (
@@ -8,7 +13,29 @@ export const Header = () => {
                 <Link href="/" className="w-36">
                     <Image src="/assets/images/logo.svg" alt="Logo" width={128} height={38}/>
                 </Link>
-                <div className="flex w-32 justify-end gap-3"></div>
+
+                {/* show navbar on large devices when user is signed in */}
+                <SignedIn>
+                    <nav className="md:flex-between hidden w-full mx-w-xs">
+                        <Navbar/>
+                    </nav>
+                </SignedIn>
+
+                <div className="flex w-32 justify-end gap-3">
+
+                    {/* when the user is signed in */}
+                    <SignedIn>
+                        <UserButton afterSignOutUrl={process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_OUT_URL}/>
+                        <NavbarMobile/>
+                    </SignedIn>
+
+                    {/* when the user is not signed in */}
+                    <SignedOut>
+                        <Button asChild className="rounded-full" size="lg">
+                            <Link href="/sign-in">Login</Link>
+                        </Button>
+                    </SignedOut>
+                </div>
             </div>
         </header>
     )
