@@ -8,6 +8,7 @@ const UserSchema = new Schema({
     username: { type: String, required: [true, "Username is required."], unique: [true, "This username is taken."] },
     name: { type: String, required: true },
     imageUrl: { type: String, required: true },
+    deletedAt: { type: Date }
 },{
     timestamps: true
 })

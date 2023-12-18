@@ -1,18 +1,11 @@
-import { Document, Types } from "mongoose"
+import { Document } from "mongoose"
 import {User} from "@/types/model-user";
 import {ICategory} from "@/types/model-category";
 import {DiscountType} from "@/constants";
 
 export interface IEvent extends Event, Document {
-    _id: string;
-    createdAt?: Date;
-    updatedAt?: Date;
-}
-
-interface Event {
-    organizer: Types.ObjectId | User;
-    category: Types.ObjectId | ICategory;
-    title: string;
+    organizer: User;
+    category: ICategory;
     description?: string;
     location?: string;
     locationLat?: string;
@@ -24,4 +17,11 @@ interface Event {
     refererDiscountType?: DiscountType;
     url?: string;
     imageUrl: string;
+    createdAt?: Date;
+    updatedAt?: Date;
+}
+
+export interface Event {
+    _id: string;
+    title: string;
 }

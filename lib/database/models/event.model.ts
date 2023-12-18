@@ -6,6 +6,7 @@ const EventSchema = new Schema({
     category: { type: Schema.Types.ObjectId, ref: "Category" },
     title: { type: String, required: [true, "Event title is required."] },
     description: { type: String },
+    participantsCount: { type: Number, default: 0 },
     location: { type: String },
     locationLat: { type: String },
     locationLng: { type: String },

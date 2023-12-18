@@ -15,3 +15,14 @@ interface User {
     name: string;
     imageUrl: string;
 }
+
+export interface CreateUser extends UpdateUser {
+    authId: string;
+}
+
+export interface UpdateUser {
+    username: string;
+    name: string;
+    email: string;
+    imageUrl: string;
+}

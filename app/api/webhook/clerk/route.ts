@@ -1,6 +1,11 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
+import {CreateUser} from "@/types/model-user";
+import {generateKey} from "@/lib/utils";
+import {createUser} from "@/lib/actions/user.action";
+import {clerkClient} from "@clerk/nextjs";
+import {NextResponse} from "next/server";
 
 export async function POST(req: Request) {
 
@@ -56,13 +61,28 @@ export async function POST(req: Request) {
     if (eventType === 'user.created') {
         const { id, email_addresses, image_url, first_name, last_name, username } = evt.data
 
-        const user = {
+        const user: CreateUser = {
             authId: id,
             email: email_addresses[0].email_address,
-            username: username,
+            username: username || `user${generateKey()}`,
             name: first_name + ' ' + last_name,
             imageUrl: image_url
         }
+
+        const userId = await createUser(user)
+
+        if (userId) {
+            await clerkClient.users.updateUserMetadata(id, {
+                publicMetadata: {
+                    userId: userId
+                }
+            })
+        }
+
+        return NextResponse.json({
+            status: true,
+            message: 'Account created successfully.'
+        }, { status: 201 })
     }
 
     return new Response('', { status: 200 })
