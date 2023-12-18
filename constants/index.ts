@@ -37,3 +37,7 @@ export enum Role {
     USER = "user",
     ADMIN = "admin"
 }
+
+export enum DiscountType {
+    Amount, Percent
+}
