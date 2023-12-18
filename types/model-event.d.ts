@@ -1,4 +1,6 @@
 import { Document, Types } from "mongoose"
+import {User} from "@/types/model-user";
+import {ICategory} from "@/types/model-category";
 
 export interface IEvent extends Event, Document {
     _id: string;
@@ -7,8 +9,8 @@ export interface IEvent extends Event, Document {
 }
 
 interface Event {
-    organizer: Types.ObjectId;
-    category: Types.ObjectId;
+    organizer: Types.ObjectId | User;
+    category: Types.ObjectId | ICategory;
     title: string;
     description?: string;
     location?: string;

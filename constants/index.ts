@@ -32,3 +32,8 @@ export const defaultMongooseConnection = {
     conn: null,
     promise: null
 }
+
+export enum Role {
+    USER = "user",
+    ADMIN = "admin"
+}
