@@ -1,9 +1,9 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
-import {CreateUser} from "@/types/model-user";
+import {CreateUser, UpdateUser} from "@/types/model-user";
 import {generateKey} from "@/lib/utils";
-import {createUser} from "@/lib/actions/user.action";
+import {createUser, updateUser} from "@/lib/actions/user.action";
 import {clerkClient} from "@clerk/nextjs";
 import {NextResponse} from "next/server";
 
@@ -59,12 +59,11 @@ export async function POST(req: Request) {
     // create user
 
     if (eventType === 'user.created') {
-        const { id, email_addresses, image_url, first_name, last_name, username } = evt.data
+        const { id, email_addresses, image_url, first_name, last_name } = evt.data
 
         const user: CreateUser = {
             authId: id,
             email: email_addresses[0].email_address,
-            username: username || `user${generateKey()}`,
             name: first_name + ' ' + last_name,
             imageUrl: image_url
         }
@@ -83,6 +82,29 @@ export async function POST(req: Request) {
             status: true,
             message: 'Account created successfully.'
         }, { status: 201 })
+    }
+
+    if (eventType === 'user.updated') {
+        const {id, image_url, first_name, last_name } = evt.data
+
+        const user: UpdateUser = {
+            name: first_name + ' ' + last_name,
+            imageUrl: image_url
+        }
+
+        const status = await updateUser(id, user)
+
+        if (status) {
+            return NextResponse.json({
+                status: true,
+                message: 'Account information updated successfully.'
+            }, { status: 200 })
+        }
+
+        return NextResponse.json({
+            status: false,
+            message: 'No change detected.'
+        }, { status: 304 })
     }
 
     return new Response('', { status: 200 })

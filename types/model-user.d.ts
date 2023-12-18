@@ -11,18 +11,16 @@ export interface IUser extends User, Document {
 
 interface User {
     _id: string;
-    username: string;
     name: string;
     imageUrl: string;
 }
 
 export interface CreateUser extends UpdateUser {
     authId: string;
+    email: string;
 }
 
 export interface UpdateUser {
-    username: string;
     name: string;
-    email: string;
     imageUrl: string;
 }
