@@ -2,7 +2,7 @@ import {navLinks} from "@/constants";
 import {link} from "@/types/general";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
-import {generateKey} from "@/lib/helper";
+import {generateKey} from "@/lib/utils";
 
 const Navbar = () => {
     const pathname = usePathname()

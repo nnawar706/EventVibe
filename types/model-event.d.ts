@@ -1,6 +1,7 @@
 import { Document, Types } from "mongoose"
 import {User} from "@/types/model-user";
 import {ICategory} from "@/types/model-category";
+import {DiscountType} from "@/constants";
 
 export interface IEvent extends Event, Document {
     _id: string;
@@ -19,5 +20,8 @@ interface Event {
     startDateTime: Date;
     endDateTime: Date;
     ticketPrice?: string;
+    refererDiscount?: number;
+    refererDiscountType?: DiscountType;
     url?: string;
+    imageUrl: string;
 }
