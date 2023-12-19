@@ -3,7 +3,7 @@ import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
 import {CreateUser, UpdateUser} from "@/types/model-user";
 import {generateKey} from "@/lib/utils";
-import {createUser, updateUser} from "@/lib/actions/user.action";
+import {createUser, deleteUser, updateUser} from "@/lib/actions/user.action";
 import {clerkClient} from "@clerk/nextjs";
 import {NextResponse} from "next/server";
 
@@ -52,8 +52,6 @@ export async function POST(req: Request) {
         })
     }
 
-    // Get the ID and type
-    const { id } = evt.data;
     const eventType = evt.type;
 
     // create user
@@ -84,6 +82,8 @@ export async function POST(req: Request) {
         }, { status: 201 })
     }
 
+    // update user
+
     if (eventType === 'user.updated') {
         const {id, image_url, first_name, last_name } = evt.data
 
@@ -98,6 +98,26 @@ export async function POST(req: Request) {
             return NextResponse.json({
                 status: true,
                 message: 'Account information updated successfully.'
+            }, { status: 200 })
+        }
+
+        return NextResponse.json({
+            status: false,
+            message: 'No change detected.'
+        }, { status: 304 })
+    }
+
+    // deactivate user
+
+    if (eventType === 'user.deleted') {
+        const { id } = evt.data
+
+        const status = await deleteUser(id!)
+
+        if (status) {
+            return NextResponse.json({
+                status: true,
+                message: 'Account deactivated successfully.'
             }, { status: 200 })
         }
 

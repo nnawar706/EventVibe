@@ -7,6 +7,7 @@ export interface IUser extends User, Document {
     email: string;
     createdAt?: Date;
     updatedAt?: Date;
+    deletedAt?: Date;
 }
 
 interface User {
