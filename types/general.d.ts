@@ -11,3 +11,8 @@ export interface QueryParams {
 export interface AddQueryParams extends QueryParams {
     value: string | null
 }
+
+export type EventFormProps = {
+    authId: string
+    type: "create" | "update"
+}
