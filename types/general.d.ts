@@ -16,3 +16,8 @@ export type EventFormProps = {
     authId: string
     type: "create" | "update"
 }
+
+export type DropdownProps = {
+    value?: string
+    onChange?: () => void
+}
