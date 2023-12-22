@@ -41,3 +41,7 @@ export enum Role {
 export enum DiscountType {
     Amount, Percent
 }
+
+export const baseUrl = {
+    url: process.env.NEXT_API_URL
+}
