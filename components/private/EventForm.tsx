@@ -37,7 +37,7 @@ const EventForm = ({ authId, type }: EventFormProps ) => {
                         render={({ field, fieldState }) => (
                             <FormItem className="w-full">
                                 <FormControl>
-                                    <Input placeholder="shadcn" {...field} className="input-field" />
+                                    <Input placeholder="Event Title" {...field} className="input-field" />
                                 </FormControl>
                                 {/* <FormMessage /> */}
                                 {fieldState.error && <FormMessage>{fieldState.error.message}</FormMessage>}
