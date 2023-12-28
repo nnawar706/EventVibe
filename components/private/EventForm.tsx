@@ -59,6 +59,22 @@ const EventForm = ({ authId, type }: EventFormProps ) => {
                         )}
                     />
                 </div>
+
+                <div className="flex flex-col gap-5 md:flex-row">
+                    <FormField
+                        control={form.control}
+                        name="description"
+                        render={({ field, fieldState }) => (
+                            <FormItem className="w-full">
+                                <FormControl>
+                                    <Input placeholder="Event Title" {...field} className="input-field" />
+                                </FormControl>
+                                {/* <FormMessage /> */}
+                                {fieldState.error && <FormMessage>{fieldState.error.message}</FormMessage>}
+                            </FormItem>
+                        )}
+                    />
+                </div>
                 <Button type="submit">Submit</Button>
             </form>
         </Form>
