@@ -118,6 +118,39 @@ const EventForm = ({ authId, type }: EventFormProps ) => {
                                         <DatePicker
                                             selected={field.value}
                                             onChange={(date: Date) => field.onChange(date)}
+                                            showTimeSelect={true}
+                                            dateFormat={"MM/dd/yyyy h:mm aa"}
+                                            wrapperClassName={"datePicker"}
+                                        />
+                                    </div>
+                                </FormControl>
+                                {/* <FormMessage /> */}
+                                {fieldState.error && <FormMessage>{fieldState.error.message}</FormMessage>}
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        control={form.control}
+                        name="startDateTime"
+                        render={({ field, fieldState }) => (
+                            <FormItem className="w-full">
+                                <FormControl>
+                                    <div className="flex-center h-[54px] w-full overflow-hidden
+                                    rounded-full bg-grey-50 px-4 py-2">
+                                        <Image
+                                            src="/assets/icons/calendar.svg"
+                                            width={24}
+                                            height={24}
+                                            alt="calendar"
+                                        />
+                                        <p className="ml-3 whitespace-nowrap text-grey-600">To:</p>
+                                        <DatePicker
+                                            selected={field.value}
+                                            onChange={(date: Date) => field.onChange(date)}
+                                            showTimeSelect={true}
+                                            dateFormat={"MM/dd/yyyy h:mm aa"}
+                                            wrapperClassName={"datePicker"}
                                         />
                                     </div>
                                 </FormControl>
@@ -144,6 +177,31 @@ const EventForm = ({ authId, type }: EventFormProps ) => {
                                             alt="calendar"
                                         />
                                         <Input placeholder="Event Location" {...field} className="input-field" />
+                                    </div>
+                                </FormControl>
+                                {/* <FormMessage /> */}
+                                {fieldState.error && <FormMessage>{fieldState.error.message}</FormMessage>}
+                            </FormItem>
+                        )}
+                    />
+                </div>
+
+                <div className="flex flex-col gap-5 md:flex-row">
+                    <FormField
+                        control={form.control}
+                        name="ticketPrice"
+                        render={({ field, fieldState }) => (
+                            <FormItem className="w-full">
+                                <FormControl>
+                                    <div className="flex-center h-[54px] w-full overflow-hidden
+                                    rounded-full bg-grey-50 px-4 py-2">
+                                        <Image
+                                            src="/assets/icons/dollar.svg"
+                                            width={24}
+                                            height={24}
+                                            alt="dollar"
+                                        />
+                                        <Input type={"number"} placeholder="Ticket Price" {...field} className="input-field" />
                                     </div>
                                 </FormControl>
                                 {/* <FormMessage /> */}

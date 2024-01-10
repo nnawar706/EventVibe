@@ -4,7 +4,7 @@ import {DiscountType} from "@/constants";
 const EventSchema = new Schema({
     organizer: { type: Schema.Types.ObjectId, ref: "User" },
     category: { type: Schema.Types.ObjectId, ref: "Category" },
-    title: { type: String, required: [true, "Event title is required."] },
+    title: { type: String, required: true },
     description: { type: String },
     participantsCount: { type: Number, default: 0 },
     location: { type: String },
@@ -14,9 +14,9 @@ const EventSchema = new Schema({
     endDateTime: { type: Date, required: true },
     ticketPrice: { type: String },
     refererDiscount: { type: Number },
-    refererDiscountType: { type: Number, enum: DiscountType, default: 0 },
+    refererDiscountType: { type: Number, enum: DiscountType, default: 0 }, // 0-dollar, 1-percentage
     url: { type: String },
-    imageUrl: { type: String, required: true }
+    imageUrl: { type: String }
 },{
     timestamps: true
 })
